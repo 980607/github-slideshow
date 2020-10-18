@@ -1,13 +1,37 @@
-# Your GitHub Learning Lab Repository for Introducing GitHub
+## Synopsis
 
-Welcome to **your** repository for your GitHub Learning Lab course. This repository will be used during the different activities that I will be guiding you through. See a word you don't understand? We've included an emoji 📖 next to some key terms. Click on it to see its definition.
+This project is my Java implementation of the Simplified DES algorithm developed by Professor Edward Schaefer of Santa Clara University. The paper describing the algorithm can be downloaded here : http://mercury.webster.edu/aleshunas/COSC%205130/G-SDES.pdf
 
-Oh! I haven't introduced myself...
+A brute-force attack on the S-DES algorithm is very easy. The key is only 10-bit long so there are only 1024 possibilities. 
 
-I'm the GitHub Learning Lab bot and I'm here to help guide you in your journey to learn and master the various topics covered in this course. I will be using Issue and Pull Request comments to communicate with you. In fact, I already added an issue for you to check out.
+## Code Example
 
-![issue tab](https://lab.github.com/public/images/issue_tab.png)
+This implementation assumes that the 8-bit block of plaintext was encoded by an 8-bit encoding charset (like ISO-8859-1).
+The S-DES encryption algorithm takes an 8-bit block of plaintext and a 10-bit key as input and produces an 8-bit block of ciphertext as output.
 
-I'll meet you over there, can't wait to get started!
+```java
+String msg = "your message to encode";
+SDES sdes = new SDES("1010011010");
+StringBuilder encMsg = new StringBuilder();
+for (int i=0; i<msg.length();i++){
+	encMsg.append(sdes.encrypt(msg.charAt(i)));
+}
+```
 
-This course is using the :sparkles: open source project [reveal.js](https://github.com/hakimel/reveal.js/). In some cases we’ve made changes to the history so it would behave during class, so head to the original project repo to learn more about the cool people behind this project.
+The S-DES decryption algorithm takes an 8-bit block of ciphertext and the same 10-bit key used to produce that ciphertext as input and produces the original 8-bit block of plaintext.
+
+```java
+String encMsg = "encoded message";
+SDES sdes = new SDES("1010011010");
+StringBuilder msg = new StringBuilder();
+for (int i=0; i<encMsg.length();i++){
+	msg.append(sdes.decrypt(encMsg.charAt(i)));
+}
+```
+
+## Motivation
+
+As part of my studies, I had to implement the S-DES algorithm as an introduction to cryptography (classical encryption, hashing and public key encryption).
+
+
+
